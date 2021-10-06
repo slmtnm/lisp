@@ -1,8 +1,7 @@
 (defun take (lst n)
   "Takes first n elements from list"
-  (if (or (zerop n) (null lst))
-      nil
-      (cons (car lst) (take (cdr lst) (- n 1)))))
+  (unless (or (zerop n) (null lst))
+    (cons (car lst) (take (cdr lst) (- n 1)))))
 
 (defun split-by (lst n)
   "Splits list by portions of n elements
