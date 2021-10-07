@@ -26,8 +26,8 @@
     ((null lst) nil)
     (t (apply #'append (mapcar #'flatten lst)))))
 
-(defun bst-preorder (tree)
-  "Prints tree in preorder"
-  (format t "~a " (car tree))
-  (when (second tree) (bst-preorder (second tree)))
-  (when (third tree) (bst-preorder (third tree))))
+(defun bst-preorder (fn tree)
+  "Walks tree in preorder"
+  (funcall fn (car tree))
+  (when (second tree) (bst-preorder fn (second tree)))
+  (when (third tree) (bst-preorder fn (third tree))))
