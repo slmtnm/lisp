@@ -21,10 +21,9 @@
   (flatten '(() 1 (2 (3 ((4)) 5) (6)) (()) 7))
   >> (1 2 3 4 5 6 7)
   "
-  (cond
-    ((not (listp lst)) (list lst))
-    ((null lst) nil)
-    (t (apply #'append (mapcar #'flatten lst)))))
+  (cond ((null lst) nil)
+        ((atom lst) (list lst))
+        (t (mapcan #'flatten lst))))
 
 (defun bst-preorder (fn tree)
   "Walks tree in preorder"

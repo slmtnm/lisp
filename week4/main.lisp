@@ -2,9 +2,9 @@
   "Checks whether integer list consists only of odds"
   (every #'(lambda (x) (and (integerp x) (oddp x))) lst))
 
-  (defun sum (lst)
-    "Sums list"
-    (apply #'+ lst))
+(defun sum (lst)
+  "Sums list"
+  (apply #'+ lst))
 
 (defun replace-odd-lists-by-their-sum (lst)
   "Replaces all sublists, that consists only of odd integers, by their sum"
