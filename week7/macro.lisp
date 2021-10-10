@@ -1,0 +1,5 @@
+(defmacro swapf (first second)
+  (let ((temp (gensym)))
+    `(let ((,temp ,first))
+       (setf ,first ,second)
+       (setf ,second ,temp))))

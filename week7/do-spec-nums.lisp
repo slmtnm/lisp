@@ -1,0 +1,18 @@
+;(defmacro specp-macro (n)
+;  (let ((n-sym (gensym)))
+;    `(let ((,n-sym ,n))
+;      (and (integerp ,n-sym)
+;       (> ,n-sym 10)
+;       (loop for i = ,n-sym then (truncate (/ i 10))
+;             when (zerop i) do (return t)
+;               when (oddp i) do (return nil))))))
+(defun specp (n)
+  (and (integerp n)
+       (> n 10)
+       (loop for i = n then (truncate (/ 10))
+             when (zerop i) do (return t)
+             when (oddp i) do (return nil))))
+
+(defmacro do-spec-nums ((var startv endv) &body body)
+  `(loop for i from ,startv to ,endv
+         when (specp i) do (let ((,var i)) ,@body)))
