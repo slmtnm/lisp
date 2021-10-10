@@ -7,23 +7,20 @@
          (every #'digit-char-p (subseq str 1)))
         (t nil)))
 
-(defun strip-left (str)
-  "Strips whitespaces from beginning of given string"
-  (dotimes (i (length str))
-    (when (not (eql (elt str i) #\ ))
-      (return (subseq str i)))))
-
 (defun parse-cdr (str)
   "Splits colon-separated CDR-string into list of three elements or nil if CDR invalid"
+  (let* ((first-colon (position #\; str))
+         (second-colon ()))
+    )
   (let ((first-colon (position #\; str)))
     (if (null first-colon)
         nil
         (let ((second-colon (position #\; str :start (1+ first-colon))))
           (if (null second-colon)
               nil
-              (list (strip-left (subseq str 0 first-colon))
-                    (strip-left (subseq str (1+ first-colon) second-colon))
-                    (strip-left (subseq str (1+ second-colon)))))))))
+              (list (string-left-trim " " (subseq str 0 first-colon))
+                    (string-left-trim " " (subseq str (1+ first-colon) second-colon))
+                    (string-left-trim " " (subseq str (1+ second-colon)))))))))
 
 (defun cdr-p (cdr)
   "Checks whether triplet (list of 3 elements) is a valid CDR
